@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- =================================================================== -->
+<!--  TEMPO2DOTPROJECT BUILD XML FILE	  		                         -->
+<!-- =================================================================== -->
+<project name="tempo2dotproject" default="info" basedir=".">
+    	
+    <path id="tempo2dotproject.classpath">
+        <fileset file="lib/">
+            <include name="**/*.jar"></include>
+        </fileset>
+    </path>
+
+    <target name="info">
+        <echo>
+-------------------------------------------
+   tempo2dotproject
+-------------------------------------------
+info - This help
+prepare - Prepares environment for compilation
+build - Compiles sources and generates the jar
+dist - Generates distributable package
+clean - Deletes previously generated files under build/ and dist/
+        </echo>
+    </target>
+
+    <target name="prepare" depends="clean">
+
+        <mkdir dir="dist"></mkdir>
+        <mkdir dir="build"></mkdir>
+        <mkdir dir="build/src"></mkdir>
+        <mkdir dir="build/lib"></mkdir>
+        <mkdir dir="build/classes"></mkdir>
+
+        <copy todir="build/src">
+            <fileset dir="src"/>
+        </copy>
+    </target>
+
+    <target name="build" depends="prepare">    	
+        <javac srcdir="build/src" destdir="build/classes" debug="on" deprecation="off" optimize="on">
+            <classpath>
+                <path refid="tempo2dotproject.classpath"></path>
+                <pathelement location="build/src"></pathelement>
+            </classpath>
+        </javac>
+
+        <copy todir="build/lib">
+            <fileset dir="lib/">
+                <include name="**"></include>
+            </fileset>
+        </copy>
+
+        <copy todir="build/classes">
+            <fileset dir="build/src">
+                <exclude name="*.java"></exclude>
+            </fileset>
+        </copy>
+
+        <pathconvert property="mf.class-path" pathsep=" ">
+            <path refid="tempo2dotproject.classpath"></path>
+            <chainedmapper>
+                <flattenmapper></flattenmapper>
+                <globmapper from="*" to="lib/*"></globmapper>
+            </chainedmapper>
+        </pathconvert>
+
+        <echo file="build/manifest.mf">Manifest-Version: 1.0</echo>
+        <jar jarfile="build/tempo2dotproject.jar">
+            <manifest>
+                <attribute name="Class-Path" value="${mf.class-path}"></attribute>
+                <attribute name="Main-Class" value="CetaCiemat/Main"/>
+            </manifest>
+            <fileset dir="build/classes" includes="**/*.class"></fileset>
+            <fileset dir="build/classes" includes="**/*.properties"></fileset>
+        </jar>
+    </target>
+
+    <target name="dist" depends="build">
+        <copy todir="dist" file="config.properties"/>
+
+        <copy todir="dist">
+            <fileset dir="build">
+                <include name="tempo2dotproject.jar"></include>
+                <include name="lib/**"></include>
+            </fileset>
+        </copy>
+
+        <tar destfile="dist/tempo2dotproject.tar.gz" compression="gzip">
+            <tarfileset dir="dist">
+                <include name="*/**"></include>
+            </tarfileset>
+
+        </tar>
+    </target>
+
+    <target name="clean">
+        <delete dir="build" quiet="true"></delete>
+        <delete dir="dist" quiet="true"></delete>
+    </target>
+</project>
