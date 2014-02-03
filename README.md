@@ -11,6 +11,8 @@
 ## Compatible versions
 This software has been tested using JIRA v5.2.5, DotProject 2.1.6 and Tempo 7.7.1.2. In future implementations we expect to test it using more recent versions of those tools.
 
+**UPDATE:** tempo2dotproject has been tested using JIRA v6.1.2 and Tempo 7.8.1.2 and it works fine :)
+
 ## Installation
 You need to have JRE6 installed in your computer in order to execute tempo2dotproject. Also, in order to build tempo2dotproject, you need [ANT](http://ant.apache.org/).
 
