@@ -50,8 +50,8 @@ public class DotProjectClient {
     public void addLogs(ArrayList<WorkLog> logs) throws ClassNotFoundException, SQLException, Exception {
         String insertString =
                 "INSERT INTO task_log "
-                + "(task_log_task, task_log_description, task_log_creator, task_log_hours, task_log_date)"
-                + "VALUES (?, ?, ?, ?, ?)";
+                + "(task_log_task, task_log_description, task_log_creator, task_log_hours, task_log_date, task_log_name)"
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         PreparedStatement insertLog = null;
 
@@ -66,6 +66,7 @@ public class DotProjectClient {
                     insertLog.setInt(3, this.getUserId(log.getUsername()));
                     insertLog.setFloat(4, log.getHours().floatValue());
                     insertLog.setDate(5, new Date(log.getWorkDate().getTime()));
+                    insertLog.setString(6, new String(log.getIssueKey().getBytes("UTF-8"), Charset.forName(encoding)));
                     insertLog.executeUpdate();
                 }
             }
