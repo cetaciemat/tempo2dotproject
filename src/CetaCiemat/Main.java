@@ -98,9 +98,7 @@ public class Main {
                     (List<String>) arguments.get("users"),
                     (List<String>) arguments.get("keys"));
             
-            if (!testMode) {
-                DotProjectClientFactory.getInstance().addLogs(logs);
-            }
+            DotProjectClientFactory.getInstance().addLogs(logs, testMode);
             Logger.getLogger(Main.class.getName()).log(Level.INFO, "Finished import :)");
         } catch (InvalidParameterException ex) {
             System.out.println(ex.getMessage());
