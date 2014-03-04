@@ -13,6 +13,8 @@ This software has been tested using JIRA v5.2.5, DotProject 2.1.6 and Tempo 7.7.
 
 **UPDATE:** tempo2dotproject has been tested using JIRA v6.1.2 and Tempo 7.8.1.2 and it works fine :)
 
+NOTE: When there is an error during the process, tempo2dotproject tries to rollback de changes. However, this feature doesn't work with the engine MyISAM.
+
 ## Installation
 You need to have JRE6 installed in your computer in order to execute tempo2dotproject. Also, in order to build tempo2dotproject, you need [ANT](http://ant.apache.org/).
 
