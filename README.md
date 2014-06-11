@@ -13,7 +13,7 @@ This software has been tested using JIRA v5.2.5, DotProject 2.1.6 and Tempo 7.7.
 
 **UPDATE:** tempo2dotproject has been tested using JIRA v6.1.2 and Tempo 7.8.1.2 and it works fine :)
 
-NOTE: When there is an error during the process, tempo2dotproject tries to rollback de changes. However, this feature doesn't work with the engine MyISAM.
+**NOTE:** When there is an error during the process, tempo2dotproject tries to rollback de changes. However, this feature doesn't work with the engine MyISAM.
 
 ## Installation
 You need to have JRE6 installed in your computer in order to execute tempo2dotproject. Also, in order to build tempo2dotproject, you need [ANT](http://ant.apache.org/).
@@ -77,8 +77,9 @@ You can execute tempo2project as a normal JAR file:
 
 * `start-date`: This parameter is mandatory. It is the start date of the time range to be used for exporting the logs. Expected format: `yyyy-mm-dd`
 * `end-date`: This parameter is mandatory. Is the end date of the time range to be used for exporting the logs. Expected format: `yyyy-mm-dd`
-* `users`: This parameter is mandatory. It is used for specifying the users whose logs will be exported. Expected format: `username1,username2,username3`
-* `keys`: This parameter is optional. It specifies the projects name which logs will be exported. Expected format: `PROJECT-1,PROJECT-2,PROJECT-3`
+* `users`: This parameter is mandatory. It is used for specifying the users whose logs will be exported. Expected format: `username1,username2,username3`. **NOTE**: If you execute Tempo2Project with PowerShell, you need to put this value enclosed in single-quotes.
+* `keys`: This parameter is optional. It specifies the projects name which logs will be exported. Expected format: `PROJECT-1,PROJECT-2,PROJECT-3`. **NOTE**: If you execute Tempo2Project with PowerShell, you need to put this value enclosed in single-quotes.
+* `keys`: This parameter is opt
 * `--test-mode`: This parameter is optional. It disables writings to DotProject database. It is useful for testing purposes, such as checking the configuration.
 
 ###LICENSE
